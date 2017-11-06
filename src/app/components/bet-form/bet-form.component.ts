@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { DataService } from '../../services/data.service';
+
 @Component({
   selector: 'app-bet-form',
   templateUrl: './bet-form.component.html',
@@ -8,15 +10,25 @@ import { Component, OnInit } from '@angular/core';
 export class BetFormComponent implements OnInit {
 
   bet: number;
+  private current: number;
+  private previous: number;
 
-  constructor() { }
+  constructor(private dataService: DataService) {
+  }
 
   ngOnInit() {
-    this.bet = (495663 + 494366) / 2;
+    this.dataService.getRate().subscribe(data => {
+      const inr_rate: number = data['bpi']['INR']['rate_float'];
+
+      this.previous = this.current || inr_rate;
+      this.current = inr_rate;
+
+      this.bet = (this.current + this.previous) / 2;
+    });
   }
 
   placeBet() {
-    console.log(`You bet: ${this.bet}`);
+    this.dataService.placeBet(this.bet);
   }
 
 }
