@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BetFormComponent implements OnInit {
 
+  bet: number;
+
   constructor() { }
 
   ngOnInit() {
+    this.bet = (495663 + 494366) / 2;
+  }
+
+  placeBet() {
+    console.log(`You bet: ${this.bet}`);
   }
 
 }
