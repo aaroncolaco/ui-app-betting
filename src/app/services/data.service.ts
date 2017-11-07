@@ -12,8 +12,16 @@ export class DataService {
     return this.http.get(this.coindeskAPI);
   }
 
-  placeBet(amount: number) {
-    console.log(`You bet: ${amount}`);
+  placeBet(prediction: number) {
+    console.log(`You predicted: ${prediction}`);  // TODO: make API call
+  }
+
+  getWalletBalance():number {
+    return 10; // TODO: API call to get balance
+  }
+
+  getLeaderBoard():Object {
+    return {}; // TODO: API call to get leaderboard
   }
 
 }
