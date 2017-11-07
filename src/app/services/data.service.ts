@@ -4,9 +4,11 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class DataService {
 
-  private coindeskAPI: string = 'https://api.coindesk.com/v1/bpi/currentprice/inr.json';
+  private coindeskAPI: string;
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {
+    this.coindeskAPI = 'https://api.coindesk.com/v1/bpi/currentprice/inr.json';
+  }
 
   getRate() {
     return this.http.get(this.coindeskAPI);
@@ -16,11 +18,11 @@ export class DataService {
     console.log(`You predicted: ${prediction}`);  // TODO: make API call
   }
 
-  getWalletBalance():number {
+  getWalletBalance(): number {
     return 10; // TODO: API call to get balance
   }
 
-  getLeaderBoard():Object {
+  getLeaderBoard(): Object {
     return {}; // TODO: API call to get leaderboard
   }
 

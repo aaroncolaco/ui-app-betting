@@ -22,7 +22,7 @@ export class SignInComponent implements OnInit {
     this.newUser = flag;
   }
 
-  userAuth(userName:string, password:string) {
+  userAuth(userName: string, password: string) {
     if (this.newUser) {
       this.authService.signUp(userName, password);
     } else {
