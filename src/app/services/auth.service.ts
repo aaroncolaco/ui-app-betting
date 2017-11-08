@@ -1,30 +1,51 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { environment } from '../../environments/environment';
+
 
 @Injectable()
 export class AuthService {
 
-  constructor() { }
+  constructor(public http: HttpClient) { }
 
-  clearBrowserToken(userName: string) {
+  private clearBrowserToken() {
     localStorage.clear();
   }
 
+  private setBrowserToken(username: string) {
+    localStorage.setItem('username', username);
+  }
+
   isUserLoggedIn(): boolean {
-    return localStorage.getItem('userName') ? true : false;
+    return localStorage.getItem('username') ? true : false;
   }
 
-  setBrowserToken(userName: string) {
-    localStorage.setItem('userName', userName);
+  signUp(username: string, password: string) {
+    this.http.post(environment.apiUrl + '/users/sign-up', { username, password })
+      .subscribe(data => {
+        if (data['status'] === 200) {
+          this.setBrowserToken(username);
+          return true;
+        }
+        console.error(`Sign Up failed:`);
+        return false;
+      });
   }
 
-  // TODO: call API
-  signUp(userName: string, password: string) {
-    console.log('New User Sign Up', userName, password);
-    this.setBrowserToken(userName);
+  signIn(username: string, password: string) {
+    this.http.post(environment.apiUrl + '/users/sign-in', { username, password })
+      .subscribe(data => {
+        if (data['status'] === 200) {
+          this.setBrowserToken(username);
+          return true;
+        }
+        console.error(`Sign In failed:`);
+        return false;
+      });
   }
 
-  signIn(userName: string, password: string) {
-    console.log('User Sign In', userName, password);
-    this.setBrowserToken(userName);
+  signOut() {
+    this.clearBrowserToken();
   }
 }

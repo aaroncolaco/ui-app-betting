@@ -10,6 +10,8 @@ import { AuthService } from '../../services/auth.service';
 export class SignInComponent implements OnInit {
 
   private newUser: boolean;
+  private username: string;
+  private password: string;
 
   constructor(private authService: AuthService) {
     this.newUser = false;
@@ -18,15 +20,14 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
   }
 
-  authTypeChange(flag: boolean) {
-    this.newUser = flag;
+  authenticateUser() {
+    this.newUser ? this.signUpUser() : this.signInUser();
   }
 
-  userAuth(userName: string, password: string) {
-    if (this.newUser) {
-      this.authService.signUp(userName, password);
-    } else {
-      this.authService.signIn(userName, password);
-    }
+  signUpUser() {
+    this.authService.signUp(this.username, this.password);
+  }
+  signInUser() {
+    this.authService.signIn(this.username, this.password);
   }
 }
