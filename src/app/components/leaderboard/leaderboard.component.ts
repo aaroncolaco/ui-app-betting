@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { DataService } from '../../services/data.service';
+
+import { Leader } from '../../models/leader';
+
 @Component({
   selector: 'app-leaderboard',
   templateUrl: './leaderboard.component.html',
@@ -7,9 +11,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaderboardComponent implements OnInit {
 
-  constructor() { }
+  leaders: Leader[];
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.leaders = this.dataService.getLeaderBoard();
+    setInterval(() => {
+      this.leaders = this.dataService.getLeaderBoard();
+    }, 5000);
   }
 
 }
+
+

@@ -1,0 +1,12 @@
+.leaderboard {
+  margin-top: 2em;
+  margin-bottom: 3em;
+}
+
+.leaderboard .heading{
+  padding-bottom: 0.8em;
+}
+
+.card {
+  margin: 0.3em;
+}

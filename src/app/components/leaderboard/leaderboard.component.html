@@ -1,3 +1,12 @@
-<p>
-  leaderboard works!
-</p>
+<div class="leaderboard">
+  <div class="heading text-center">
+    <h3>Leaderboard</h3>
+  </div>
+  <br>
+  <div class="card w-90" *ngFor="let leader of leaders; let i = index">
+    <div class="card-body">
+      <h4 class="card-title">{{i+1}}. {{leader.username}}</h4>
+      <p class="card-text text-muted">Coins: {{leader.balance}}</p>
+    </div>
+  </div>
+</div>
