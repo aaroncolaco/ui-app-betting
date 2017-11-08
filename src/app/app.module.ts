@@ -6,26 +6,26 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { BetFormComponent } from './components/bet-form/bet-form.component';
-import { ScoreboardComponent } from './components/scoreboard/scoreboard.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 
 import { DataService } from './services/data.service';
 import { AuthService } from './services/auth.service';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 
 const appRoutes: Routes = [
   { path: '', component: BetFormComponent },
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'scores', component: ScoreboardComponent }
+  { path: 'leaderboard', component: LeaderboardComponent },
+  { path: 'sign-in', component: SignInComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     BetFormComponent,
-    ScoreboardComponent,
     NavbarComponent,
-    SignInComponent
+    SignInComponent,
+    LeaderboardComponent
   ],
   imports: [
     BrowserModule,
