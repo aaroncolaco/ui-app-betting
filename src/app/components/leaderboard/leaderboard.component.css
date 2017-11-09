@@ -10,3 +10,15 @@
 .card {
   margin: 0.3em;
 }
+
+.first {
+  color: gold;
+}
+
+.second {
+  color: silver;
+}
+
+.third {
+  color:#cd7f32;
+}

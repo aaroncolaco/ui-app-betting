@@ -5,7 +5,11 @@
   <br>
   <div class="card w-90" *ngFor="let leader of leaders; let i = index">
     <div class="card-body">
-      <h4 class="card-title">{{i+1}}. {{leader.username}}</h4>
+      <h4 class="card-title">{{i+1}}. {{leader.username}}
+        <i *ngIf="i==0" class="first pull-right fa fa-trophy" aria-hidden="true"></i>
+        <i *ngIf="i==1" class="second pull-right fa fa-trophy" aria-hidden="true"></i>
+        <i *ngIf="i==2" class="third pull-right fa fa-trophy" aria-hidden="true"></i>
+      </h4>
       <p class="card-text text-muted">Coins: {{leader.balance}}</p>
     </div>
   </div>
