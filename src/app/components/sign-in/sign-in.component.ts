@@ -12,6 +12,7 @@ export class SignInComponent implements OnInit {
   private newUser: boolean;
   private username: string;
   private password: string;
+  private incorrectCredentials: boolean;
 
   constructor(private authService: AuthService) {
     this.newUser = false;
@@ -22,13 +23,26 @@ export class SignInComponent implements OnInit {
 
   authenticateUser() {
     this.newUser ? this.signUpUser() : this.signInUser();
-    window.location.href = '';
   }
 
   signUpUser() {
-    return this.authService.signUp(this.username, this.password);
+    this.authService.signUp(this.username, this.password)
+      .subscribe(success => this.success(success), err => this.failure(err));
   }
+
   signInUser() {
-    return this.authService.signIn(this.username, this.password);
+    this.authService.signIn(this.username, this.password)
+      .subscribe(success => this.success(success), err => this.failure(err));
+  }
+
+  success(data) {
+    this.authService.setUserAuthenticated(this.username, '');
+    window.location.href = '';
+  }
+
+  private failure(err) {
+    console.error(err);
+    this.incorrectCredentials = true;
+    this.password = '';
   }
 }

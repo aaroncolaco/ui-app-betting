@@ -22,34 +22,22 @@ export class AuthService {
     return <string>Md5.hashStr(password);
   }
 
+  setUserAuthenticated(username: string, redirectUrl: string) {
+    this.setBrowserToken(username);
+  }
+
   isUserLoggedIn(): boolean {
     return localStorage.getItem('username') ? true : false;
   }
 
   signUp(username: string, password: string) {
     password = this.hashPassword(password);
-    this.http.post(environment.apiUrl + '/users/sign-up', { username, password })
-      .subscribe(data => {
-        if (data['status'] === 200) {
-          this.setBrowserToken(username);
-          return true;
-        }
-        console.error(`Sign Up failed:`);
-        return false;
-      });
+    return this.http.post(environment.apiUrl + '/users/sign-up', { username, password });
   }
 
   signIn(username: string, password: string) {
     password = this.hashPassword(password);
-    this.http.post(environment.apiUrl + '/users/sign-in', { username, password })
-      .subscribe(data => {
-        if (data['status'] === 200) {
-          this.setBrowserToken(username);
-          return true;
-        }
-        console.error(`Sign In failed:`);
-        return false;
-      });
+    return this.http.post(environment.apiUrl + '/users/sign-in', { username, password });
   }
 
   signOut() {

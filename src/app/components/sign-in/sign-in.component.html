@@ -1,3 +1,18 @@
+<div *ngIf='incorrectCredentials && !newUser' class="card text-white bg-danger mb-2">
+  <div class="card-body">
+    <h4 class="card-title">Incorrect Credentials</h4>
+    <p class="card-text">Incorrect username or password</p>
+  </div>
+</div>
+
+<div *ngIf='incorrectCredentials && newUser' class="card text-white bg-danger mb-2">
+  <div class="card-body">
+    <h4 class="card-title">Username Taken</h4>
+    <p class="card-text">Username must be unique</p>
+  </div>
+</div>
+
+
 <div class="card text-center">
   <div class="card-header">
     <ul class="nav nav-tabs justify-content-center card-header-tabs">
