@@ -22,6 +22,10 @@ export class AuthService {
     return <string>Md5.hashStr(password);
   }
 
+  getUsername():string {
+    return localStorage.getItem('username');
+  }
+
   setUserAuthenticated(username: string, redirectUrl: string) {
     this.setBrowserToken(username);
   }

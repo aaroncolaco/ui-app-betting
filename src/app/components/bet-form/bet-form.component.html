@@ -31,16 +31,25 @@
   </div>
 </div>
 
+<div *ngIf='txHash' class="card center txHash">
+  <div class="card-header">
+    Transaction Hash
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{txHash}}</li>
+  </ul>
+</div>
+
 <div class="current card center">
   <div class="card-header">
     Your Prediction
   </div>
-  <div class="card-body text-center">
-    <form (submit)="makePrediction(prediction.value)">
+  <div class="card-body text-center" >
+    <form (submit)="makePrediction(prediction.value)" ngNativeValidate>
       <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1"><i class="fa fa-inr" aria-hidden="true"></i></span>
-          <input type="number" class="form-control" #prediction>
+          <input type="number" class="form-control" #prediction required>
         </div>
         <small id="betHelp" class="form-text text-muted">Bet will be {{coins}} PslCoins </small>
       </div>

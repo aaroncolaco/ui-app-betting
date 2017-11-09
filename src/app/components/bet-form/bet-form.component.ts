@@ -16,11 +16,14 @@ export class BetFormComponent implements OnInit {
   private coins: number; // number of coins to bet
   private balance: number; // number of coins in account
 
+  public txHash: string;
+
   constructor(private dataService: DataService) {
-    this.balance = this.dataService.getWalletBalance();
+    this.getWalletBalance();
   }
 
   ngOnInit() {
+    // TODO: get from API
     this.dataService.getRate().subscribe(data => {
       const inr_rate: number = data['bpi']['INR']['rate_float'];
 
@@ -33,8 +36,20 @@ export class BetFormComponent implements OnInit {
     });
   }
 
+  private getWalletBalance() {
+    this.dataService.getWalletBalance()
+      .subscribe(data => {
+        this.balance = data['balance'];
+      }, err => console.error(err));
+  }
+
   makePrediction(prediction: number) {
     this.prediction = prediction;
-    this.dataService.placeBet(this.prediction);
+    this.dataService.placeBet(this.prediction)
+      .subscribe(data => {
+        this.txHash = data['txHash'];
+        this.getWalletBalance();
+      }, err => console.error(err));
   }
+
 }
