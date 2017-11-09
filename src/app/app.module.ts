@@ -2,21 +2,35 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { BetFormComponent } from './components/bet-form/bet-form.component';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 
-import { DataService } from './services/data.service';
+
+import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
-import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
+import { DataService } from './services/data.service';
+
 
 const appRoutes: Routes = [
-  { path: '', component: BetFormComponent },
-  { path: 'leaderboard', component: LeaderboardComponent },
-  { path: 'sign-in', component: SignInComponent }
+  {
+    path: '',
+    component: BetFormComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'leaderboard',
+    component: LeaderboardComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'sign-in',
+    component: SignInComponent
+  }
 ];
 
 @NgModule({
@@ -33,7 +47,11 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthService, DataService],
+  providers: [
+    AuthGuardService,
+    AuthService,
+    DataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
