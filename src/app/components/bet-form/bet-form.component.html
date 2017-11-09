@@ -6,17 +6,17 @@
   </div>
 </div>-->
 
-<h4 class="text-center heading">Predict price of Bitcoin at {{hour+1}}:00</h4>
+<h4 class="text-center heading">Predict price of Bitcoin at {{hours+1}}:00</h4>
 
 <div class="previous card bg-light center">
   <div class="card-header">
-    Previous
+    Current Rate
   </div>
   <div class="card-body text-center">
-    <h3 class="card-text"><i class="fa fa-inr fa" aria-hidden="true"></i> {{previous}}</h3>
+    <h3 class="card-text"><i class="fa fa-inr fa" aria-hidden="true"></i> {{rate}}</h3>
   </div>
   <div class="card-footer text-muted">
-    At {{hour}}:00
+    At {{time}}
     <p class="card-text pull-right"><small class="text-muted">Powered by Coindesk</small></p>
   </div>
 
@@ -44,16 +44,16 @@
   <div class="card-header">
     Your Prediction
   </div>
-  <div class="card-body text-center" >
+  <div class="card-body text-center">
     <form (submit)="makePrediction(prediction.value)" ngNativeValidate>
       <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1"><i class="fa fa-inr" aria-hidden="true"></i></span>
-          <input type="number" class="form-control" #prediction required>
+          <input class="form-control" #prediction required value='{{rate}}' pattern="\d{1,10}.\d{0,5}">
         </div>
         <small id="betHelp" class="form-text text-muted">Bet will be {{coins}} PslCoins </small>
       </div>
-      <button type="submit" class="btn btn-primary">Bet</button>
+      <button type="submit" class="btn btn-primary">Bet {{coins}} PslCoins</button>
     </form>
   </div>
 </div>

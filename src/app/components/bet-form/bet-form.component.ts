@@ -10,9 +10,9 @@ import { DataService } from '../../services/data.service';
 export class BetFormComponent implements OnInit {
 
   prediction: number;
-  private current: number;
-  private previous: number;
-  private hour: number;
+  private rate: number;
+  private time;
+  private hours: number;
   private coins: number; // number of coins to bet
   private balance: number; // number of coins in account
 
@@ -20,20 +20,15 @@ export class BetFormComponent implements OnInit {
 
   constructor(private dataService: DataService) {
     this.getWalletBalance();
+    this.updateBitcoinRate();
+    this.time = new Date().toLocaleTimeString();
+    this.hours = new Date().getHours();
   }
 
   ngOnInit() {
-    // TODO: get from API
-    this.dataService.getRate().subscribe(data => {
-      const inr_rate: number = data['bpi']['INR']['rate_float'];
+    this.coins = 5;
 
-      this.previous = this.current || inr_rate;
-      this.current = inr_rate;
-
-      this.hour = new Date().getHours();
-
-      this.coins = 5;
-    });
+    setInterval(() => this.updateBitcoinRate(), 5 * 60 * 1000);
   }
 
   private getWalletBalance() {
@@ -41,6 +36,16 @@ export class BetFormComponent implements OnInit {
       .subscribe(data => {
         this.balance = data['balance'];
       }, err => console.error(err));
+  }
+
+  private updateBitcoinRate() {
+    this.time = new Date().toLocaleTimeString();
+
+    this.dataService.getRate()
+      .subscribe(
+      data => this.rate = data['bpi']['INR']['rate_float'],
+      err => console.error(err)
+      );
   }
 
   makePrediction(prediction: number) {
