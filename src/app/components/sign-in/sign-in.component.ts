@@ -22,12 +22,13 @@ export class SignInComponent implements OnInit {
 
   authenticateUser() {
     this.newUser ? this.signUpUser() : this.signInUser();
+    window.location.href = '';
   }
 
   signUpUser() {
-    this.authService.signUp(this.username, this.password);
+    return this.authService.signUp(this.username, this.password);
   }
   signInUser() {
-    this.authService.signIn(this.username, this.password);
+    return this.authService.signIn(this.username, this.password);
   }
 }

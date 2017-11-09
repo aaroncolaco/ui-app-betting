@@ -10,17 +10,17 @@
     </ul>
   </div>
   <div class="card-body">
-    <form (submit)="authenticateUser()">
+    <form (submit)="authenticateUser()" ngNativeValidate>
       <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-user-o" aria-hidden="true"></i></span>
-          <input type="text" class="form-control" placeholder="Username" [(ngModel)]="username" name="username">
+          <input type="text" class="form-control" required placeholder="Username" [(ngModel)]="username" name="username">
         </div>
       </div>
       <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-          <input type="password" class="form-control" placeholder="Password" [(ngModel)]="password" name="password">
+          <input type="password" class="form-control" required placeholder="Password" [(ngModel)]="password" name="password">
         </div>
       </div>
       <button type="submit" class="btn btn-primary">{{ newUser ? 'Sign Up' : 'Sign In' }}</button>
