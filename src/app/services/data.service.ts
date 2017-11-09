@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { Leader } from '../models/leader';
 
+import { environment } from '../../environments/environment';
+
 @Injectable()
 export class DataService {
 
@@ -24,16 +26,8 @@ export class DataService {
     return 10; // TODO: API call to get balance
   }
 
-  getLeaderBoard(): Leader[] {
-    const mock: Leader[] = [
-      { username: 'johndoe', balance: 100 },
-      { username: 'carol', balance: 96 },
-      { username: 'dave', balance: 80 },
-      { username: 'aliceparker', balance: 63 },
-      { username: 'jane', balance: 60 },
-      { username: 'steve', balance: 53 }
-    ];
-    return mock; // TODO: API call to get leaderboard
+  getLeaderBoard() {
+    return this.http
+      .get(environment.apiUrl + '/users/leaderboard?username=janedoe');
   }
-
 }

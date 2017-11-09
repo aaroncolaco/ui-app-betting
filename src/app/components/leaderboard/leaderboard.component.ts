@@ -16,10 +16,17 @@ export class LeaderboardComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.leaders = this.dataService.getLeaderBoard();
+    this.getLeaderBoard();
     setInterval(() => {
-      this.leaders = this.dataService.getLeaderBoard();
+      this.getLeaderBoard();
     }, 5000);
+  }
+
+  private getLeaderBoard() {
+    this.dataService.getLeaderBoard()
+      .subscribe((data: Leader[]) => {
+        this.leaders = data;
+      }, err => err);
   }
 
 }
