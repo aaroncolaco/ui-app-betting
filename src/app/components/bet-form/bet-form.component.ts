@@ -53,10 +53,8 @@ export class BetFormComponent implements OnInit {
   }
 
   makePrediction(prediction: number) {
-    this.prediction = prediction;
-    this.dataService.placeBet(this.prediction)
+    this.dataService.placeBet(this.prediction, this.coins)
       .subscribe(data => {
-
         this.bets = this.dataService.addBet(this.prediction, this.coins); // update my bets
         this.getWalletBalance(); // update my wallet balance
       }, err => console.error(err));

@@ -24,9 +24,9 @@ export class DataService {
     return this.http.get(this.coindeskAPI);
   }
 
-  placeBet(prediction: number) {
+  placeBet(prediction: number, coins: number) {
     return this.http
-      .post(environment.apiUrl + '/users/predict', { username: this.username, prediction });
+      .post(environment.apiUrl + '/users/predict', { username: this.username, prediction, coins });
   }
 
   getWalletBalance() {
@@ -36,7 +36,7 @@ export class DataService {
 
   getLeaderBoard() {
     return this.http
-      .get(environment.apiUrl + '/users/leaderboard?username=janedoe');
+      .get(environment.apiUrl + '/users/leaderboard');
   }
 
   addBet(prediction: number, amount: number): Bet[] {
