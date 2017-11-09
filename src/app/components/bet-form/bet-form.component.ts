@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../../services/data.service';
 
+import { Bet } from '../../models/bet';
+
 @Component({
   selector: 'app-bet-form',
   templateUrl: './bet-form.component.html',
@@ -11,22 +13,24 @@ export class BetFormComponent implements OnInit {
 
   prediction: number;
   private rate: number;
-  private time;
+  private time: string;
   private hours: number;
   private coins: number; // number of coins to bet
   private balance: number; // number of coins in account
+  private bets: Bet[];
 
-  public txHash: string;
 
   constructor(private dataService: DataService) {
+  }
+
+  ngOnInit() {
     this.getWalletBalance();
     this.updateBitcoinRate();
     this.time = new Date().toLocaleTimeString();
     this.hours = new Date().getHours();
-  }
-
-  ngOnInit() {
     this.coins = 5;
+
+    this.bets = this.dataService.getBets();
 
     setInterval(() => this.updateBitcoinRate(), 5 * 60 * 1000);
   }
@@ -52,8 +56,9 @@ export class BetFormComponent implements OnInit {
     this.prediction = prediction;
     this.dataService.placeBet(this.prediction)
       .subscribe(data => {
-        this.txHash = data['txHash'];
-        this.getWalletBalance();
+
+        this.bets = this.dataService.addBet(this.prediction, this.coins); // update my bets
+        this.getWalletBalance(); // update my wallet balance
       }, err => console.error(err));
   }
 

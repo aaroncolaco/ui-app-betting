@@ -22,7 +22,7 @@ export class AuthService {
     return <string>Md5.hashStr(password);
   }
 
-  getUsername():string {
+  getUsername(): string {
     return localStorage.getItem('username');
   }
 

@@ -31,15 +31,6 @@
   </div>
 </div>
 
-<div *ngIf='txHash' class="card center txHash">
-  <div class="card-header">
-    Transaction Hash
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{txHash}}</li>
-  </ul>
-</div>
-
 <div class="current card center">
   <div class="card-header">
     Your Prediction
@@ -55,5 +46,17 @@
       </div>
       <button type="submit" class="btn btn-primary">Bet {{coins}} PslCoins</button>
     </form>
+  </div>
+</div>
+
+<div class="card center bg-light">
+  <div class="card-header">
+    Predictions so far
+  </div>
+  <div class="card-body" *ngFor='let bet of bets'>
+    <p class="prediction card-text">{{bet.prediction}}</p>
+    <p class="time pull-right">{{bet.time}}</p>
+    <p class="amount card-text text-muted">{{bet.amount}} PslCoins</p>
+    <hr>
   </div>
 </div>
