@@ -24,7 +24,8 @@ export class DataService {
     return this.http.get(this.coindeskAPI);
   }
 
-  placeBet(prediction: number, coins: number) {
+  placeBet(prediction: any, coins: number) {
+    prediction = parseInt(prediction);
     return this.http
       .post(environment.apiUrl + '/users/predict', { username: this.username, prediction, coins });
   }
