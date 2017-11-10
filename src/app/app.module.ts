@@ -15,6 +15,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { DataService } from './services/data.service';
 
+import { OrderByPipe } from './components/leaderboard/sort.pipe';
 
 const appRoutes: Routes = [
   {
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     BetFormComponent,
     NavbarComponent,
     SignInComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
