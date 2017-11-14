@@ -18,6 +18,8 @@ export class BetFormComponent implements OnInit {
   private coins: number; // number of coins to bet
   private balance: number; // number of coins in account
   private bets: Bet[];
+  private showSuccessMessage: boolean;
+  private showErrorMessage: boolean;
 
 
   constructor(private dataService: DataService) {
@@ -29,6 +31,8 @@ export class BetFormComponent implements OnInit {
     this.time = new Date().toLocaleTimeString();
     this.hours = new Date().getHours();
     this.coins = 5;
+
+    this.prediction = this.rate;
 
     this.bets = this.dataService.getBets();
 
@@ -47,18 +51,27 @@ export class BetFormComponent implements OnInit {
 
     this.dataService.getRate()
       .subscribe(
-      data => this.rate = data['bpi']['INR']['rate_float'],
+      data => this.rate = data['bpi']['INR']['rate_float'].toString().split('.')[0],
       err => console.error(err)
       );
   }
 
   makePrediction(prediction: number) {
-    this.prediction = prediction
+    this.prediction = prediction;
     this.dataService.placeBet(this.prediction, this.coins)
       .subscribe(data => {
         this.bets = this.dataService.addBet(this.prediction, this.coins); // update my bets
         this.getWalletBalance(); // update my wallet balance
-      }, err => console.error(err));
+
+        this.showErrorMessage = false;
+        this.showSuccessMessage = true;
+
+        document.getElementById('userPrediction')['value'] = '';
+      }, err => {
+        console.error(err);
+        this.showSuccessMessage = false;
+        this.showErrorMessage = true;
+      });
   }
 
 }

@@ -36,17 +36,25 @@
     Your Prediction
   </div>
   <div class="card-body text-center">
-    <form (submit)="makePrediction(prediction.value)" ngNativeValidate>
+    <form (submit)="makePrediction(userPrediction.value)" ngNativeValidate>
       <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1"><i class="fa fa-inr" aria-hidden="true"></i></span>
-          <input class="form-control" #prediction required value='{{rate}}' pattern="\d{1,10}.\d{0,5}">
+          <input class="form-control" #userPrediction id="userPrediction" required value='{{rate}}' pattern="\d{1,10}">
         </div>
         <small id="betHelp" class="form-text text-muted">Bet will be {{coins}} PslCoins </small>
       </div>
       <button type="submit" class="btn btn-primary">Bet {{coins}} PslCoins</button>
     </form>
   </div>
+</div>
+
+<div *ngIf='showSuccessMessage' class="alert alert-success text-center center" role="alert">
+  You bet <strong>{{coins}} PslCoins</strong> on <strong>{{prediction}}</strong>
+</div>
+
+<div *ngIf='showErrorMessage' class="alert alert-danger text-center center" role="alert">
+  Something went wrong. Please try again.
 </div>
 
 <div class="card center bg-light">

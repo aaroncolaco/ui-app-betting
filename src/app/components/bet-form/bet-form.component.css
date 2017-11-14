@@ -16,3 +16,8 @@
   position: relative;
   margin-top: -2.4em;
 }
+
+.alert {
+  width: 90%;
+  margin-bottom: 2em;
+}
