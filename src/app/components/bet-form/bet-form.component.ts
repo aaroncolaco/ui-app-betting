@@ -12,14 +12,14 @@ import { Bet } from '../../models/bet';
 export class BetFormComponent implements OnInit {
 
   prediction: number;
-  private rate: number;
-  private time: string;
-  private hours: number;
-  private coins: number; // number of coins to bet
-  private balance: number; // number of coins in account
-  private bets: Bet[];
-  private showSuccessMessage: boolean;
-  private showErrorMessage: boolean;
+  rate: number;
+  time: string;
+  hours: number;
+  coins: number; // number of coins to bet
+  balance: number; // number of coins in account
+  bets: Bet[];
+  showSuccessMessage: boolean;
+  showErrorMessage: boolean;
 
 
   constructor(private dataService: DataService) {

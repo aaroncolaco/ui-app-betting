@@ -9,10 +9,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignInComponent implements OnInit {
 
-  private newUser: boolean;
-  private username: string;
-  private password: string;
-  private incorrectCredentials: boolean;
+  newUser: boolean;
+  username: string;
+  password: string;
+  incorrectCredentials: boolean;
 
   constructor(private authService: AuthService) {
     this.newUser = false;
