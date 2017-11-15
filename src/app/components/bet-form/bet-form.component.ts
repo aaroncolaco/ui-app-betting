@@ -37,6 +37,7 @@ export class BetFormComponent implements OnInit {
     this.bets = this.dataService.getBets();
 
     setInterval(() => this.updateBitcoinRate(), 5 * 60 * 1000);
+    setInterval(() => { this.getWalletBalance() }, 5 * 1000);
   }
 
   private getWalletBalance() {
